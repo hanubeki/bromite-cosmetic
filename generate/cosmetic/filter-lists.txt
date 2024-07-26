@@ -1,20 +1,28 @@
-https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters.txt
-https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/badware.txt
-https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/quick-fixes.txt
-https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/unbreak.txt
-https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/privacy.txt
-https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/resource-abuse.txt
-https://raw.githubusercontent.com/eEIi0A5L/adblock_filter/master/ichigo_filter.txt
-https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=1&mimetype=plaintext
+# base
 https://filters.adtidy.org/extension/ublock/filters/2.txt
-https://filters.adtidy.org/extension/ublock/filters/11.txt
+
+# annoyance
 https://filters.adtidy.org/extension/ublock/filters/14.txt
-https://filters.adtidy.org/extension/ublock/filters/17.txt
-https://filters.adtidy.org/extension/ublock/filters/118.txt
-https://filters.adtidy.org/extension/ublock/filters/122.txt
-https://filters.adtidy.org/extension/ublock/filters/208.txt
-https://fanboy.co.nz/fanboy-problematic-sites.txt
-https://raw.githubusercontent.com/Yuki2718/adblock/master/japanese/jp-filters.txt
-https://raw.githubusercontent.com/Yuki2718/adblock/master/japanese/jp-mob.txt
-https://raw.githubusercontent.com/Yuki2718/adblock/master/japanese/jp-annoyances.txt
-https://raw.githubusercontent.com/Yuki2718/adblock/master/japanese/jp-annoyances-plus.txt
+
+# social
+https://filters.adtidy.org/extension/ublock/filters/4.txt
+
+# mobile
+https://filters.adtidy.org/extension/ublock/filters/11.txt
+
+# tracking
+# https://filters.adtidy.org/extension/ublock/filters/3.txt
+# https://filters.adtidy.org/extension/ublock/filters/17.txt
+# https://raw.githubusercontent.com/gwarser/filter-lists/master/lan-block-strict.txt
+
+# en
+# https://pgl.yoyo.org/adservers/serverlist.php?hostformat=adblockplus&mimetype=plaintext
+
+# ja
+https://filters.adtidy.org/extension/ublock/filters/7.txt
+https://raw.githubusercontent.com/Yuki2718/adblock2/main/japanese/jpf-plus.txt
+
+# additional
+# https://raw.githubusercontent.com/Yhonay/antipopads/master/popads.txt
+# https://www.bentasker.co.uk/adblock/adblock_compiled.txt
+https://raw.githubusercontent.com/tofukko/filter/master/antena.txt
