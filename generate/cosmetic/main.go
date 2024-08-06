@@ -106,7 +106,7 @@ func main() {
 	for _, f := range lookupTable {
 		joined := joinSorted(f.Selectors, ",")
 		duplicateCount[joined] = duplicateCount[joined] + 1
-		joined := joinSorted(f.Exceptions, ",")
+		joined = joinSorted(f.Exceptions, ",")
 		duplicateCount[joined] = duplicateCount[joined] + 1
 		joined = joinSorted(f.InjectedCSS, "")
 		duplicateCount[joined] = duplicateCount[joined] + 1
@@ -146,9 +146,9 @@ func main() {
 		if len(filter.Exceptions) > 0 {
 			joined := joinSorted(filter.Exceptions, ",")
 			if duplicateCount[joined] > 1 {
-				compiledExceptionsRules[domain] = deduplicatedIndexMapping[joined]
+				compiledSelectorExceptions[domain] = deduplicatedIndexMapping[joined]
 			} else {
-				compiledExceptionsRules[domain] = joined
+				compiledSelectorExceptions[domain] = joined
 			}
 		}
 
