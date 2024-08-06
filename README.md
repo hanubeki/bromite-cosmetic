@@ -7,12 +7,6 @@ Here scripts are sorted by category. See below on how to install them into your 
 #### Blockers
 Bromite has a built-in ad blocker (also see my [Bromite ad blocking project](https://github.com/xarantolus/filtrite)), but some sites are very good at bypassing it. We can improve blocking on these sites using scripts.
 
-* [**Twitter**](https://github.com/xarantolus/bromite-userscripts/releases/latest/download/twitter.user.js): block ads on Twitter (sponsored tweets, trends etc.)
-* [**I don't care about cookies**](https://github.com/xarantolus/bromite-userscripts/releases/latest/download/idcac.user.js): block all kinds of cookie prompts.
-  * This script is based on the ["I don't care about cookies" browser extension](https://addons.mozilla.org/de/firefox/addon/i-dont-care-about-cookies/) (GPL).
-  * This script is automatically regenerated from time to time, keeping up to date with the latest rules from the browser extension
-  * **Security consideration**: if the author of the browser extension inserts malicious code, this script would likely also contain that code
-  * In my tests, this script added around 30-100ms to the load time of websites, so its impact is really small despite the rather large size of around 1MB
 * [**Cosmetic AdBlock**](https://github.com/xarantolus/bromite-userscripts/releases/latest/download/cosmetic.user.js): block annoying elements
   * You can also [**use the lite version with about half the size**](https://github.com/xarantolus/bromite-userscripts/releases/latest/download/cosmetic-lite.user.js), it only includes rules for the top 250k domains from this [top 1M domains](http://s3-us-west-1.amazonaws.com/umbrella-static/index.html) dataset
   * The Bromite AdBlock engine does not support cosmetic filtering, so this script implements that capability (to a *very* basic extent)
