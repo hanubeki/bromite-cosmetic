@@ -90,11 +90,22 @@ func main() {
 		// Now only keep the filters for top/important domains
 		topDomainLookupTable := make(map[string]filter.CombineResult)
 		for domain, filter := range lookupTable {
+			allTilded := true
+
 			for _, fragment := range filter.Domains {
-				if topDomains.Contains(fragment) {
-					topDomainLookupTable[domain] = filter
-					break
+				if !strings.HasPrefix(fragment, "~") {
+					allTilded = false
+
+					if topDomains.Contains(fragment) {
+						topDomainLookupTable[domain] = filter
+						break
+					}
 				}
+			}
+
+			if allTilded {
+				// I coded but I decided to not include
+				// topDomainLookupTable[domain] = filter
 			}
 		}
 		fmt.Printf("Selected %d top domains from %d domains with available filters\n", len(topDomainLookupTable), len(lookupTable))
