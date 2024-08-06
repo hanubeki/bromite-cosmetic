@@ -27,8 +27,9 @@
     let deduplicatedStrings = {{.deduplicatedStrings }};
     let injectionRules = {{.injectionRules }};
     let rules = {{.rules }};
-    let exceptions = {{.exceptions }}
+    let exceptions = {{.exceptions }};
     let defaultRules = rules[""];
+    let defaultExceptions = exceptions[""];
 
 
     function getRules(host) {
@@ -83,6 +84,7 @@
         }
 
         output.push({ "s": defaultRules, isDefault: true });
+        output.push({ "e": defaultExceptions, isDefault: true });
 
         return output;
     }
@@ -101,6 +103,9 @@
         .map(r => r["s"]).join(",") + ")" + notSelector + hideRules;
 
     let cssInjections = foundRules.filter(r => r["i"] != null).map(r => r["i"]).join("");
+
+    // let pageSpecificNotSelector = ":not(" + foundRules.filter(r => r["e"] != null && !r.isDefault)
+    //     .map(r => r["e"]).join(",") + ")"
 
     let pageSpecificSelectors = ":is(" + foundRules.filter(r => r["s"] != null && !r.isDefault)
         .map(r => r["s"]).join(",") + ")" + notSelector;
