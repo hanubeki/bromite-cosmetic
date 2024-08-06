@@ -44,6 +44,7 @@
             for (let j = 0; j < ruleSplit.length; j++) {
                 if (!ruleSplit[j].startsWith("~")) {
                     allTilded = false;
+                    break;
                 }
             }
 
@@ -57,6 +58,7 @@
 
                     if (ruleSplit.includes(tilded)) {
                         foundTilded = true;
+                        break;
                     }
                 }
 
@@ -66,9 +68,9 @@
             } else {
                 for (let k = 0; k < domainSplit.length - 1; k++) {
                     let domain = domainSplit.slice(k, domainSplit.length).join(".").toLowerCase();
-        
+
                     log("Checking if we got a rule for", domain);
-        
+
                     if (ruleSplit.includes(domain)) {
                         let foundTilded = false;
 
@@ -77,6 +79,7 @@
 
                             if (ruleSplit.includes(tilded)) {
                                 foundTilded = true;
+                                break;
                             }
                         }
 
@@ -107,11 +110,11 @@
                 if (typeof rule === 'number') {
                     // the selector is saved at this index in the deduplicatedRules array
                     let realRule = deduplicatedStrings[rule];
-                    log("Found deduplicated rule", rule, "for domain", ruleKeys[i]));
+                    log("Found deduplicated rule", rule, "for domain", ruleKeys[i]);
                     output.push({ "s": realRule });
                 } else {
                     // It's a string that directly defines the selector
-                    log("Found normal rule for domain", ruleKeys[i]));
+                    log("Found normal rule for domain", ruleKeys[i]);
                     output.push({ "s": rule });
                 }
             }
