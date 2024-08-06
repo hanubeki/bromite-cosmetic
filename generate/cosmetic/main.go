@@ -181,7 +181,7 @@ func main() {
 		"exceptions":          toJSObject(compiledSelectorExceptions),
 		"injectionRules":      toJSObject(compiledInjectionRules),
 		"deduplicatedStrings": toJSObject(deduplicatedStrings),
-		"statistics":          fmt.Sprintf("blockers for %d domains, injected CSS rules for %d domains", len(compiledSelectorRules), len(compiledInjectionRules)),
+		"statistics":          fmt.Sprintf("blockers for %d domains, exceptions for %d domains, injected CSS rules for %d domains", len(compiledSelectorRules), len(compiledSelectorExceptions), len(compiledInjectionRules)),
 		"isLite":              topDomains != nil,
 		"topDomainCount":      *topDomainCount,
 	})
