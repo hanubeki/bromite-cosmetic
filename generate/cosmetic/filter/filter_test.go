@@ -34,8 +34,8 @@ func TestParseLine(t *testing.T) {
 
 		// Invalid rules that should be rejected
 
-		// has() is not supported by chromium
-		{"example.com##.ad:has(.child)", Rule{}, false},
+		// has() is not supported by chromium, but I go through
+		{"example.com##.ad:has(.child)", Rule{Domains: []string{"example.com"}, CSSSelector: ".ad:has(.child)"}, true},
 
 		// Other rules are either already taken care of by the built-in adblocker or are just not supported
 		{"http://example.org/", Rule{}, false},
