@@ -51,8 +51,8 @@ func ParseLine(line string) (f Rule, ok bool) {
 		isCSSInjection = false
 		isCSSException = false
 	} else if split = strings.SplitN(line, "#@#", 2); len(split) == 2 {
-		// A CSS injection
-		// Example:   domain1.com,domain2.com#$#.cookie { display: none!important; }
+		// Exception rule
+		// Example:   domain1.com,domain2.com#@#.allowed-element
 		isCSSInjection = false
 		isCSSException = true
 	} else if split = strings.SplitN(line, "#$#", 2); len(split) == 2 {
