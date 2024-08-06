@@ -32,7 +32,7 @@
     let defaultExceptions = exceptions[""];
 
 
-    function findRules(host) {
+    function findRules(rules, host) {
         let domainSplit = host.split(".");
 
         let output = [];
@@ -40,24 +40,49 @@
         for (i in rules) {
             let ruleSplit = i.split(",");
 
-            for (let j = 0; j < domainSplit.length - 1; j++) {
-                let domain = domainSplit.slice(j, domainSplit.length).join(".").toLowerCase();
-    
-                log("Checking if we got a rule for", domain);
-    
-                if (ruleSplit.includes(domain)) {
-                    let foundTilded = false;
+            let allTilded = true;
+            for (let j = 0; j < ruleSplit.length; j++) {
+                if (!ruleSplit[j].startsWith("~")) {
+                    allTilded = false;
+                }
+            }
 
-                    for (let k = 0; k < domainSplit.length - 1; k++) {
-                        let tilded = "~" + domainSplit.slice(k, domainSplit.length).join(".").toLowerCase();
+            if (allTilded) {
+                log("Checking if we got an all-tilded rule");
 
-                        if (ruleSplit.includes(tilded)) {
-                            foundTilded = true;
-                        }
+                let foundTilded = false;
+
+                for (let k = 0; k < domainSplit.length - 1; k++) {
+                    let tilded = "~" + domainSplit.slice(k, domainSplit.length).join(".").toLowerCase();
+
+                    if (ruleSplit.includes(tilded)) {
+                        foundTilded = true;
                     }
+                }
 
-                    if (!foundTilded) {
-                        output.push(i);
+                if (!foundTilded) {
+                    output.push(i);
+                }
+            } else {
+                for (let j = 0; j < domainSplit.length - 1; j++) {
+                    let domain = domainSplit.slice(j, domainSplit.length).join(".").toLowerCase();
+        
+                    log("Checking if we got a rule for", domain);
+        
+                    if (ruleSplit.includes(domain)) {
+                        let foundTilded = false;
+
+                        for (let k = 0; k < domainSplit.length - 1; k++) {
+                            let tilded = "~" + domainSplit.slice(k, domainSplit.length).join(".").toLowerCase();
+
+                            if (ruleSplit.includes(tilded)) {
+                                foundTilded = true;
+                            }
+                        }
+
+                        if (!foundTilded) {
+                            output.push(i);
+                        }
                     }
                 }
             }
@@ -71,12 +96,13 @@
         let domainSplit = host.split(".");
 
         let output = [];
-        let keys = findRules(host);
 
-        for (let i = 0; i < keys.length - 1; i++) {
-            log("Checking if we got a rule for", keys[i]);
+        let ruleKeys = findRules(rules, host);
 
-            let rule = rules[keys[i]];
+        for (let i = 0; i < ruleKeys.length - 1; i++) {
+            log("Checking if we got a rule for", ruleKeys[i]);
+
+            let rule = rules[ruleKeys[i]];
             if (rule != null) {
                 if (typeof rule === 'number') {
                     // the selector is saved at this index in the deduplicatedRules array
@@ -89,8 +115,14 @@
                     output.push({ "s": rule });
                 }
             }
+        }
 
-            let exception = exceptions[domain];
+        let exceptionKeys = findRules(exceptions, host)
+
+        for (let i = 0; i < exceptionKeys.length - 1; i++) {
+            log("Checking if we got an exception for", exceptionKeys[i]);
+
+            let exception = exceptions[exceptionKeys[i]];
             if (exception != null) {
                 if (typeof exception === 'number') {
                     // the exception is saved at this index in the deduplicatedExceptions array
@@ -103,8 +135,14 @@
                     output.push({ "e": exception });
                 }
             }
+        }
 
-            let injection = injectionRules[domain];
+        let injectionKeys = findRules(injectionRules, host)
+
+        for (let i = 0; i < injectionKeys.length - 1; i++) {
+            log("Checking if we got an injection rule for", exceptionKeys[i]);
+
+            let injection = injectionRules[injectionKeys[i]];
             if (injection != null) {
                 if (typeof injection === 'number') {
                     let realInjection = deduplicatedStrings[injection];
