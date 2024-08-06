@@ -27,6 +27,7 @@
     let deduplicatedStrings = {{.deduplicatedStrings }};
     let injectionRules = {{.injectionRules }};
     let rules = {{.rules }};
+    let exceptions = {{.exceptions }}
     let defaultRules = rules[""];
 
 
@@ -51,6 +52,20 @@
                     // It's a string that directly defines the selector
                     log("Found normal rule for domain", domain);
                     output.push({ "s": rule });
+                }
+            }
+
+            let exception = exceptions[domain];
+            if (exception != null) {
+                if (typeof exception === 'number') {
+                    // the exception is saved at this index in the deduplicatedExceptions array
+                    let realException = deduplicatedStrings[exception];
+                    log("Found deduplicated exception", exception, "for domain", domain);
+                    output.push({ "e": realException });
+                } else {
+                    // It's a string that directly defines the selector
+                    log("Found normal exception for domain", domain);
+                    output.push({ "e": exception });
                 }
             }
 
@@ -79,13 +94,16 @@
 
     log("Found", foundRules.length, "rules to inject");
 
+    let notSelector = ":not(" + foundRules.filter(r => r["e"] != null)
+    .map(r => r["e"]).join(",") + ")"
+
     let hiddenElementsSelector = foundRules.filter(r => r["s"] != null)
-        .map(r => r["s"]).join(",") + hideRules;
+        .map(r => r["s"]).join(",") + notSelector + hideRules;
 
     let cssInjections = foundRules.filter(r => r["i"] != null).map(r => r["i"]).join("");
 
     let pageSpecificSelectors = foundRules.filter(r => r["s"] != null && !r.isDefault)
-        .map(r => r["s"]).join(",");
+        .map(r => r["s"]).join(",") + notSelector;
 
     log("Page specific selectors:", (pageSpecificSelectors || "(none)"))
 

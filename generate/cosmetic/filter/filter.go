@@ -13,6 +13,8 @@ type Rule struct {
 
 	CSSSelector string
 
+	isException bool
+
 	InjectedCSS string
 }
 
@@ -24,9 +26,9 @@ func isIncompatibleSelector(s string) bool {
 	}
 
 	// Chromium doesn't seem to support the :has() selector
-	if strings.Contains(s, ":has(") {
-		return true
-	}
+	// if strings.Contains(s, ":has(") {
+	// 	return true
+	// }
 
 	// We assume that anything else is supported
 	return false
@@ -39,6 +41,7 @@ var (
 // See https://help.eyeo.com/en/adblockplus/how-to-write-filters, "Content Filters"
 func ParseLine(line string) (f Rule, ok bool) {
 	var isCSSInjection bool
+	var isCSSException bool
 
 	var split []string
 	// Check which type of rule we got in this line
@@ -46,10 +49,17 @@ func ParseLine(line string) (f Rule, ok bool) {
 		// Element hiding rule
 		// Example:   domain1.com,domain2.com##.blocked-element
 		isCSSInjection = false
+		isCSSException = false
+	} else if split = strings.SplitN(line, "#@#", 2); len(split) == 2 {
+		// A CSS injection
+		// Example:   domain1.com,domain2.com#$#.cookie { display: none!important; }
+		isCSSInjection = false
+		isCSSException = true
 	} else if split = strings.SplitN(line, "#$#", 2); len(split) == 2 {
 		// A CSS injection
 		// Example:   domain1.com,domain2.com#$#.cookie { display: none!important; }
 		isCSSInjection = true
+		isCSSException = false
 	} else {
 		// The statement in this line is not recognized, ignore it
 		return f, false
@@ -96,6 +106,7 @@ func ParseLine(line string) (f Rule, ok bool) {
 	return Rule{
 		Domains:     domains,
 		CSSSelector: selector,
+		isException: isCSSException,
 		InjectedCSS: injectedStyle,
 	}, true
 }

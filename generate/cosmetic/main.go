@@ -106,6 +106,8 @@ func main() {
 	for _, f := range lookupTable {
 		joined := joinSorted(f.Selectors, ",")
 		duplicateCount[joined] = duplicateCount[joined] + 1
+		joined := joinSorted(f.Exceptions, ",")
+		duplicateCount[joined] = duplicateCount[joined] + 1
 		joined = joinSorted(f.InjectedCSS, "")
 		duplicateCount[joined] = duplicateCount[joined] + 1
 	}
@@ -128,6 +130,7 @@ func main() {
 	// - an int, which is the index of a common rule (that was present more than once)
 	var (
 		compiledSelectorRules  = map[string]interface{}{}
+		compiledSelectorExceptions  = map[string]interface{}{}
 		compiledInjectionRules = map[string]interface{}{}
 	)
 	for domain, filter := range lookupTable {
@@ -137,6 +140,15 @@ func main() {
 				compiledSelectorRules[domain] = deduplicatedIndexMapping[joined]
 			} else {
 				compiledSelectorRules[domain] = joined
+			}
+		}
+
+		if len(filter.Exceptions) > 0 {
+			joined := joinSorted(filter.Exceptions, ",")
+			if duplicateCount[joined] > 1 {
+				compiledExceptionsRules[domain] = deduplicatedIndexMapping[joined]
+			} else {
+				compiledExceptionsRules[domain] = joined
 			}
 		}
 
@@ -151,6 +163,7 @@ func main() {
 	}
 
 	fmt.Printf("Combined them for %d domains\n", len(compiledSelectorRules))
+	fmt.Printf("Exeption for %d domains\n", len(compiledSelectorExceptions))
 
 	outputFile, err := os.Create(*scriptTarget)
 	if err != nil {
@@ -165,6 +178,7 @@ func main() {
 	err = scriptTemplate.Execute(outputFile, map[string]interface{}{
 		"version":             time.Now().Format("2006.01.02"),
 		"rules":               toJSObject(compiledSelectorRules),
+		"exceptions":          toJSObject(compiledSelectorExceptions),
 		"injectionRules":      toJSObject(compiledInjectionRules),
 		"deduplicatedStrings": toJSObject(deduplicatedStrings),
 		"statistics":          fmt.Sprintf("blockers for %d domains, injected CSS rules for %d domains", len(compiledSelectorRules), len(compiledInjectionRules)),

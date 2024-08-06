@@ -2,6 +2,7 @@ package filter
 
 type CombineResult struct {
 	Selectors   []string
+	Exceptions  []string
 	InjectedCSS []string
 }
 
@@ -13,7 +14,11 @@ func Combine(filters []Rule) (m map[string]CombineResult) {
 			out := m[d]
 
 			if f.CSSSelector != "" && !contains(out.Selectors, f.CSSSelector) {
-				out.Selectors = append(out.Selectors, f.CSSSelector)
+				if f.isException {
+					out.Exceptions = append(out.Exceptions, f.CSSSelector)
+				} else {
+					out.Selectors = append(out.Selectors, f.CSSSelector)
+				}
 			}
 			if f.InjectedCSS != "" && !contains(out.InjectedCSS, f.InjectedCSS) {
 				out.InjectedCSS = append(out.InjectedCSS, f.InjectedCSS)
