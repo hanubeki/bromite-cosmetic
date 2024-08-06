@@ -30,6 +30,7 @@
     let exceptions = {{.exceptions }};
     let defaultRules = rules[""];
     let defaultExceptions = exceptions[""];
+    let defaultInjections = injectionRules[""];
 
 
     function findRules(rules, host) {
@@ -152,6 +153,7 @@
 
         output.push({ "s": defaultRules, isDefault: true });
         output.push({ "e": defaultExceptions, isDefault: true });
+        output.push({ "i": defaultInjections, isDefault: true });
 
         return output;
     }
@@ -164,7 +166,7 @@
     log("Found", foundRules.length, "rules to inject");
 
     let notSelector = ":not(" + foundRules.filter(r => r["e"] != null)
-    .map(r => r["e"]).join(",") + ")"
+        .map(r => r["e"]).join(",") + ")"
 
     // unlikely but possible
     if (notSelector === ":not()") {
