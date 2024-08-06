@@ -97,13 +97,13 @@
     let notSelector = ":not(" + foundRules.filter(r => r["e"] != null)
     .map(r => r["e"]).join(",") + ")"
 
-    let hiddenElementsSelector = foundRules.filter(r => r["s"] != null)
-        .map(r => r["s"]).join(",") + notSelector + hideRules;
+    let hiddenElementsSelector = ":is(" + foundRules.filter(r => r["s"] != null)
+        .map(r => r["s"]).join(",") + ")" + notSelector + hideRules;
 
     let cssInjections = foundRules.filter(r => r["i"] != null).map(r => r["i"]).join("");
 
-    let pageSpecificSelectors = foundRules.filter(r => r["s"] != null && !r.isDefault)
-        .map(r => r["s"]).join(",") + notSelector;
+    let pageSpecificSelectors = ":is(" + foundRules.filter(r => r["s"] != null && !r.isDefault)
+        .map(r => r["s"]).join(",") + ")" + notSelector;
 
     log("Page specific selectors:", (pageSpecificSelectors || "(none)"))
 
