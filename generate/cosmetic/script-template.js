@@ -64,16 +64,16 @@
                     output.push(i);
                 }
             } else {
-                for (let j = 0; j < domainSplit.length - 1; j++) {
-                    let domain = domainSplit.slice(j, domainSplit.length).join(".").toLowerCase();
+                for (let k = 0; k < domainSplit.length - 1; k++) {
+                    let domain = domainSplit.slice(k, domainSplit.length).join(".").toLowerCase();
         
                     log("Checking if we got a rule for", domain);
         
                     if (ruleSplit.includes(domain)) {
                         let foundTilded = false;
 
-                        for (let k = 0; k < domainSplit.length - 1; k++) {
-                            let tilded = "~" + domainSplit.slice(k, domainSplit.length).join(".").toLowerCase();
+                        for (let l = 0; l < domainSplit.length - 1; l++) {
+                            let tilded = "~" + domainSplit.slice(l, domainSplit.length).join(".").toLowerCase();
 
                             if (ruleSplit.includes(tilded)) {
                                 foundTilded = true;
