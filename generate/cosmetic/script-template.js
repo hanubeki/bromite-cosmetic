@@ -133,7 +133,7 @@
     }
 
     function hidePageSpecificElements(reason) {
-        if (pageSpecificSelectors.length == 0) return;
+        if (pageSpecificSelectors.startsWith(":is()")) return;
 
         log("Searching for elements (" + reason + ")")
         let elems = [...document.querySelectorAll(pageSpecificSelectors)];
