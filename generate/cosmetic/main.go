@@ -104,7 +104,7 @@ func main() {
 			}
 
 			if allTilded {
-				// I coded but I decided to not include
+				// I coded it but I decided to not include
 				// topDomainLookupTable[domain] = filter
 			}
 		}
