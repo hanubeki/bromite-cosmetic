@@ -107,11 +107,11 @@
                 if (typeof rule === 'number') {
                     // the selector is saved at this index in the deduplicatedRules array
                     let realRule = deduplicatedStrings[rule];
-                    log("Found deduplicated rule", rule, "for domain", domain);
+                    log("Found deduplicated rule", rule, "for domain", ruleKeys[i]));
                     output.push({ "s": realRule });
                 } else {
                     // It's a string that directly defines the selector
-                    log("Found normal rule for domain", domain);
+                    log("Found normal rule for domain", ruleKeys[i]));
                     output.push({ "s": rule });
                 }
             }
@@ -127,11 +127,11 @@
                 if (typeof exception === 'number') {
                     // the exception is saved at this index in the deduplicatedExceptions array
                     let realException = deduplicatedStrings[exception];
-                    log("Found deduplicated exception", exception, "for domain", domain);
+                    log("Found deduplicated exception", exception, "for domain", exceptionKeys[i]);
                     output.push({ "e": realException });
                 } else {
                     // It's a string that directly defines the selector
-                    log("Found normal exception for domain", domain);
+                    log("Found normal exception for domain", exceptionKeys[i]);
                     output.push({ "e": exception });
                 }
             }
@@ -140,16 +140,16 @@
         let injectionKeys = findRules(injectionRules, host)
 
         for (let i = 0; i < injectionKeys.length - 1; i++) {
-            log("Checking if we got an injection rule for", exceptionKeys[i]);
+            log("Checking if we got an injection rule for", injectionKeys[i]);
 
             let injection = injectionRules[injectionKeys[i]];
             if (injection != null) {
                 if (typeof injection === 'number') {
                     let realInjection = deduplicatedStrings[injection];
-                    log("Found deduplicated injection", injection, "for domain", domain);
+                    log("Found deduplicated injection", injection, "for domain", injectionKeys[i]);
                     output.push({ "i": realInjection })
                 } else {
-                    log("Found normal injection for domain", domain);
+                    log("Found normal injection for domain", injectionKeys[i]);
                     output.push({ "i": injection });
                 }
             }
