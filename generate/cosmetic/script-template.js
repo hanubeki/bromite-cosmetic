@@ -69,9 +69,9 @@
                 for (let k = 0; k < domainSplit.length - 1; k++) {
                     let domain = domainSplit.slice(k, domainSplit.length).join(".").toLowerCase();
 
-                    log("Checking if we got a rule for", domain);
-
                     if (ruleSplit.includes(domain)) {
+                        log("Checking if we got a rule for", domain);
+
                         let foundTilded = false;
 
                         for (let l = 0; l < domainSplit.length - 1; l++) {
@@ -96,8 +96,6 @@
 
 
     function getRules(host) {
-        let domainSplit = host.split(".");
-
         let output = [];
 
         let ruleKeys = findRules(rules, host);
