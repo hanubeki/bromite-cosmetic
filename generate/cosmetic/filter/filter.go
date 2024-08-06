@@ -20,6 +20,11 @@ type Rule struct {
 	InjectedCSS string
 }
 
+func joinSorted(f []string, comma string) string {
+	sort.Strings(f)
+	return strings.Join(f, comma)
+}
+
 func isIncompatibleSelector(s string) bool {
 	// We want only valid selectors, so we check if we can parse it
 	_, err := cascadia.Parse(s)
