@@ -99,6 +99,11 @@
     let notSelector = ":not(" + foundRules.filter(r => r["e"] != null)
     .map(r => r["e"]).join(",") + ")"
 
+    // unlikely but possible
+    if (notSelector === ":not()") {
+        notSelector = "";
+    }
+
     let hiddenElementsSelector = ":is(" + foundRules.filter(r => r["s"] != null)
         .map(r => r["s"]).join(",") + ")" + notSelector + hideRules;
 
