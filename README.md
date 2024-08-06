@@ -12,6 +12,7 @@ Bromite has a built-in ad blocker (also see my [Bromite ad blocking project](htt
   * The Bromite AdBlock engine does not support cosmetic filtering, so this script implements that capability (to a *very* basic extent)
   * ~~This script doesn't know about exception rules, so it will block too many elements on some pages~~
     * This fork has an attempt to support exception rules
+      * However, it can't be merged into xarantolus' upstream since the script must be generated into single file to exceptions work.
   * Rules are regenerated once a week from the filter lists defined in [this file](generate/cosmetic/filter-lists.txt)
   * Do not use the normal script on less powerful devices
     * In my performance tests, sites take an average of 300-400ms longer to load ("[first contentful paint](https://web.dev/fcp/)" metric) when the script is active (tests were done on a Mi Mix 2, a phone released 2017)
