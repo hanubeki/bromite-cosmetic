@@ -38,7 +38,10 @@ func TestParseLine(t *testing.T) {
 		{"example.com##.ad:has(.child)", Rule{Domains: []string{"example.com"}, CSSSelector: ".ad:has(.child)"}, true},
 
 		// exception rules
-		{"example.com#@#.ad", Rule{Domains: []string{"example.com"}, CSSSelector: ".ad", isException: true}, true},
+		{"example.com#@#.non-ad", Rule{Domains: []string{"example.com"}, CSSSelector: ".non-ad", isException: true}, true},
+
+		// tilded domains
+		{"example.com,~subdomain.example.com##.ad", Rule{Domains: []string{"example.com", "~subdomain.example.com"}, CSSSelector: ".ad"}, true},
 
 		// Other rules are either already taken care of by the built-in adblocker or are just not supported
 		{"http://example.org/", Rule{}, false},

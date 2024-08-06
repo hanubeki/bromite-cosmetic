@@ -32,17 +32,51 @@
     let defaultExceptions = exceptions[""];
 
 
-    function getRules(host) {
+    function findRules(host) {
         let domainSplit = host.split(".");
 
         let output = [];
 
-        for (let i = 0; i < domainSplit.length - 1; i++) {
-            let domain = domainSplit.slice(i, domainSplit.length).join(".").toLowerCase();
+        for (i in rules) {
+            let ruleSplit = i.split(",");
 
-            log("Checking if we got a rule for", domain);
+            for (let j = 0; j < domainSplit.length - 1; j++) {
+                let domain = domainSplit.slice(j, domainSplit.length).join(".").toLowerCase();
+    
+                log("Checking if we got a rule for", domain);
+    
+                if (ruleSplit.includes(domain)) {
+                    let foundTilded = false;
 
-            let rule = rules[domain];
+                    for (let k = 0; k < domainSplit.length - 1; k++) {
+                        let tilded = "~" + domainSplit.slice(k, domainSplit.length).join(".").toLowerCase();
+
+                        if (ruleSplit.includes(tilded)) {
+                            foundTilded = true;
+                        }
+                    }
+
+                    if (!foundTilded) {
+                        output.push(i);
+                    }
+                }
+            }
+        }
+
+        return output;
+    }
+
+
+    function getRules(host) {
+        let domainSplit = host.split(".");
+
+        let output = [];
+        let keys = findRules(host);
+
+        for (let i = 0; i < keys.length - 1; i++) {
+            log("Checking if we got a rule for", keys[i]);
+
+            let rule = rules[keys[i]];
             if (rule != null) {
                 if (typeof rule === 'number') {
                     // the selector is saved at this index in the deduplicatedRules array

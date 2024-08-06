@@ -11,6 +11,8 @@ import (
 type Rule struct {
 	Domains []string
 
+	JoinedDmains string
+
 	CSSSelector string
 
 	isException bool
@@ -67,7 +69,7 @@ func ParseLine(line string) (f Rule, ok bool) {
 
 	// We currently only support very basic filters.
 	// This check makes sure the other filters types are filtered out
-	if split[0] != "*" && strings.ContainsAny(split[0], "*~#@") {
+	if split[0] != "*" && strings.ContainsAny(split[0], "*#@") {
 		return f, false
 	}
 
@@ -103,10 +105,13 @@ func ParseLine(line string) (f Rule, ok bool) {
 		domains = []string{""}
 	}
 
+	joinedDomains := joinSorted(domains, ",")
+
 	return Rule{
-		Domains:     domains,
-		CSSSelector: selector,
-		isException: isCSSException,
-		InjectedCSS: injectedStyle,
+		Domains:       domains,
+		JoinedDomains: joinedDomains,
+		CSSSelector:   selector,
+		isException:   isCSSException,
+		InjectedCSS:   injectedStyle,
 	}, true
 }
