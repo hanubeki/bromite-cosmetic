@@ -11,7 +11,7 @@ import (
 type Rule struct {
 	Domains []string
 
-	JoinedDmains string
+	JoinedDomains string
 
 	CSSSelector string
 
