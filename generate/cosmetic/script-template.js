@@ -101,7 +101,7 @@
 
         let ruleKeys = findRules(rules, host);
 
-        for (let i = 0; i < ruleKeys.length - 1; i++) {
+        for (let i = 0; i < ruleKeys.length; i++) {
             let rule = rules[ruleKeys[i]];
             if (rule != null) {
                 if (typeof rule === 'number') {
@@ -119,7 +119,7 @@
 
         let exceptionKeys = findRules(exceptions, host)
 
-        for (let i = 0; i < exceptionKeys.length - 1; i++) {
+        for (let i = 0; i < exceptionKeys.length; i++) {
             let exception = exceptions[exceptionKeys[i]];
             if (exception != null) {
                 if (typeof exception === 'number') {
@@ -137,7 +137,7 @@
 
         let injectionKeys = findRules(injectionRules, host)
 
-        for (let i = 0; i < injectionKeys.length - 1; i++) {
+        for (let i = 0; i < injectionKeys.length; i++) {
             let injection = injectionRules[injectionKeys[i]];
             if (injection != null) {
                 if (typeof injection === 'number') {
