@@ -15,7 +15,7 @@ Bromite has a built-in ad blocker (also see xarantolus' [Bromite ad blocking pro
     * However, it can't be merged into xarantolus' upstream since the script must be generated into single file to exceptions work.
   * Rules are regenerated once a week from the filter lists defined in [this file](generate/cosmetic/filter-lists.txt)
   * Do not use the normal script on less powerful devices
-    * In my performance tests, sites take an average of 300-400ms longer to load ("[first contentful paint](https://web.dev/fcp/)" metric) when the script is active (tests were done on a Mi Mix 2, a phone released 2017)
+    * In xarantolus' performance tests, sites take an average of 300-400ms longer to load ("[first contentful paint](https://web.dev/fcp/)" metric) when the script is active (tests were done on a Mi Mix 2, a phone released 2017)
     * However, it takes way more than 400ms to manually click "Decline" on an annoying popup, so I think it is a good tradeoff
     * This fork is much slower than upstream as the script has experimental `~domain` support
 
