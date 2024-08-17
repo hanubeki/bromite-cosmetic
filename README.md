@@ -5,10 +5,10 @@ This is a repository that hosts [User Scripts for Bromite](https://github.com/br
 Here scripts are sorted by category. See below on how to install them into your browser.
 
 #### Blockers
-Bromite has a built-in ad blocker (also see my [Bromite ad blocking project](https://github.com/xarantolus/filtrite)), but some sites are very good at bypassing it. We can improve blocking on these sites using scripts.
+Bromite has a built-in ad blocker (also see xarantolus' [Bromite ad blocking project](https://github.com/xarantolus/filtrite)), but some sites are very good at bypassing it. We can improve blocking on these sites using scripts.
 
-* [**Cosmetic AdBlock**](https://github.com/xarantolus/bromite-userscripts/releases/latest/download/cosmetic.user.js): block annoying elements
-  * You can also [**use the lite version with about half the size**](https://github.com/xarantolus/bromite-userscripts/releases/latest/download/cosmetic-lite.user.js), it only includes rules for the top 250k domains from this [top 1M domains](http://s3-us-west-1.amazonaws.com/umbrella-static/index.html) dataset
+* [**Cosmetic AdBlock**](https://github.com/hanubeki/bromite-cosmetic/releases/latest/download/cosmetic.user.js): block annoying elements
+  * You can also [**use the lite version with about half the size**](https://github.com/hanubeki/bromite-cosmetic/releases/latest/download/cosmetic-lite.user.js), it only includes rules for the top 250k domains from this [top 1M domains](http://s3-us-west-1.amazonaws.com/umbrella-static/index.html) dataset
   * The Bromite AdBlock engine does not support cosmetic filtering, so this script implements that capability (to a *very* basic extent)
   * ~~This script doesn't know about exception rules, so it will block too many elements on some pages~~
     * This fork has an attempt to support some exception rules (currently only `~domain` and `#@#` are supported)
@@ -39,7 +39,7 @@ Make sure you have a recent version of [Bromite](https://www.bromite.org/) insta
 ### Auto-generated scripts
 Some scripts are auto-generated (because they need to be regenerated from time to time to include up to date sources). The source code for the generators is in subdirectories of the [`generate`](generate/) directory.
 
-You can see statistics (e.g. number of included rules) in the [latest release](https://github.com/xarantolus/bromite-userscripts/releases/latest).
+You can see statistics (e.g. number of included rules) in the [latest release](https://github.com/hanubeki/bromite-cosmetic/releases/latest).
 
 ### Creating your own scripts
 You can also create your own scripts, see the [official documentation](https://github.com/bromite/bromite/wiki/UserScripts) on how to do that. You should read the [Chromium User Script Design Document](https://www.chromium.org/developers/design-documents/user-scripts) to learn about existing pitfalls.
