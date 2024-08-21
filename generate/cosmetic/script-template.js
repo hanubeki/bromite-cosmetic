@@ -155,7 +155,7 @@
         let injectionExceptionKeys = findRules(injectionExceptions, host)
 
         for (let i = 0; i < injectionExceptionKeys.length; i++) {
-            let injectionException = injectionExceptionKeys[injectionExceptionKeys[i]];
+            let injectionException = injectionExceptions[injectionExceptionKeys[i]];
             if (injectionException != null) {
                 if (typeof injectionException === 'number') {
                     let realInjectionException = deduplicatedStrings[injectionException];
