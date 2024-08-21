@@ -197,15 +197,14 @@
     let cssInjections = foundRules.filter(r => r["i"] != null).map(r => r["i"]).join("");
     let cssInjectionExceptions = foundRules.filter(r => r["x"] != null).map(r => r["x"]).join("|");
 
-    log("found injection exception rules:", cssInjectionExceptions);
-
     if (cssInjectionExceptions !== "") {
-        let cssInjectionExceptionsRegex = new RegExp("(" + cssInjectionExceptions + ")", "g");
+        log("found injection exception rules:", cssInjectionExceptions);
 
-        cssInjections.replace(cssInjectionExceptionsRegex, "");
+        let cssInjectionExceptionsRegex = new RegExp(cssInjectionExceptions, "g");
+        cssInjections = cssInjections.replace(cssInjectionExceptionsRegex, "");
+
+        log("injection string after exception:", cssInjections);
     }
-
-    log("injection string after exception:", cssInjections);
 
     // let pageSpecificNotSelector = ":not(" + foundRules.filter(r => r["e"] != null && !r.isDefault)
     //     .map(r => r["e"]).join(",") + ")"
