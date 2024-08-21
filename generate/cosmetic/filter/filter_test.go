@@ -39,6 +39,7 @@ func TestParseLine(t *testing.T) {
 
 		// exception rules
 		{"example.com#@#.non-ad", Rule{Domains: []string{"example.com"}, JoinedDomains: "example.com", CSSSelector: ".non-ad", isException: true}, true},
+		{"example.com#@$#body { background-color: red!important; }", Rule{Domains: []string{"example.com"}, JoinedDomains: "example.com", InjectedCSS: "body { background-color: red!important; }", isException: true}, true},
 
 		// tilded domains
 		{"example.com,~subdomain.example.com##.ad", Rule{Domains: []string{"example.com", "~subdomain.example.com"}, JoinedDomains: "example.com,~subdomain.example.com", CSSSelector: ".ad"}, true},

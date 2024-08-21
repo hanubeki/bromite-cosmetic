@@ -26,7 +26,7 @@ func Combine(filters []Rule) (m map[string]CombineResult) {
 		}
 		if f.InjectedCSS != "" && !contains(out.InjectedCSS, f.InjectedCSS) {
 			if f.isException {
-				out.InjectException = append(out.InjectedCSS, f.InjectedCSS)
+				out.InjectException = append(out.InjectException, f.InjectedCSS)
 			} else {
 				out.InjectedCSS = append(out.InjectedCSS, f.InjectedCSS)
 			}
