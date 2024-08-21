@@ -11,7 +11,7 @@ Bromite has a built-in ad blocker (also see xarantolus' [Bromite ad blocking pro
   * You can also [**use the lite version with about half the size**](https://github.com/hanubeki/bromite-cosmetic/releases/latest/download/cosmetic-lite.user.js), it only includes rules for the top 250k domains from this [top 1M domains](http://s3-us-west-1.amazonaws.com/umbrella-static/index.html) dataset
   * The Bromite AdBlock engine does not support cosmetic filtering, so this script implements that capability (to a *very* basic extent)
   * ~~This script doesn't know about exception rules, so it will block too many elements on some pages~~
-    * This fork has an attempt to support some exception rules (currently only `~domain`,`#@#` and `#@$#` are supported)
+    * This fork has an attempt to support some exception rules (currently only `~domain`, `#@#` and `#@$#` are supported)
     * However, it can't be merged into xarantolus' upstream since the script must be generated into single file to exceptions work.
   * Rules are regenerated once a week from the filter lists defined in [this file](generate/cosmetic/filter-lists.txt)
   * Do not use the normal script on less powerful devices
