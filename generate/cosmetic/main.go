@@ -24,7 +24,6 @@ func joinSorted(f []string, comma string) string {
 }
 
 func joinSortedMeta(f []string, comma string) string {
-	out := ""
 	tmp := make([]string, len(f))
 	copy(tmp, f)
 	sort.Strings(tmp)
