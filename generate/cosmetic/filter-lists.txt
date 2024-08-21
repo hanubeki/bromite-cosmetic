@@ -1,26 +1,26 @@
 # base
-https://filters.adtidy.org/extension/ublock/filters/2.txt
+https://filters.adtidy.org/extension/android-content-blocker/filters/2.txt
 
 # annoyance
-https://filters.adtidy.org/extension/ublock/filters/14.txt
+https://filters.adtidy.org/extension/android-content-blocker/filters/14.txt
 
 # social
-https://filters.adtidy.org/extension/ublock/filters/4.txt
+https://filters.adtidy.org/extension/android-content-blocker/filters/4.txt
 
 # mobile
-https://filters.adtidy.org/extension/ublock/filters/11.txt
+https://filters.adtidy.org/extension/android-content-blocker/filters/11.txt
 
 # tracking
-# https://filters.adtidy.org/extension/ublock/filters/3.txt
-# https://filters.adtidy.org/extension/ublock/filters/17.txt
+# https://filters.adtidy.org/extension/android-content-blocker/filters/3.txt
+# https://filters.adtidy.org/extension/android-content-blocker/filters/17.txt
 # https://raw.githubusercontent.com/gwarser/filter-lists/master/lan-block-strict.txt
 
 # en
 # https://pgl.yoyo.org/adservers/serverlist.php?hostformat=adblockplus&mimetype=plaintext
 
 # ja
-https://filters.adtidy.org/extension/ublock/filters/7.txt
-https://raw.githubusercontent.com/Yuki2718/adblock2/main/japanese/jpf-plus.txt
+https://filters.adtidy.org/extension/android-content-blocker/filters/7.txt
+# https://raw.githubusercontent.com/Yuki2718/adblock2/main/japanese/jpf-plus.txt
 
 # additional
 # https://raw.githubusercontent.com/Yhonay/antipopads/master/popads.txt
