@@ -152,9 +152,26 @@
             }
         }
 
-        output.push({ "s": defaultRules, isDefault: true });
-        output.push({ "e": defaultExceptions, isDefault: true });
-        output.push({ "i": defaultInjections, isDefault: true });
+        let injectionExceptionKeys = findRules(injectionExceptions, host)
+
+        for (let i = 0; i < injectionExceptionKeys.length; i++) {
+            let injectionException = injectionExceptionKeys[injectionExceptionKeys[i]];
+            if (injectionException != null) {
+                if (typeof injectionException === 'number') {
+                    let realInjectionException = deduplicatedStrings[injectionException];
+                    log("Found deduplicated injection exception", injectionException, "for domain", injectionExceptionKeys[i]);
+                    output.push({ "x": realInjectionException })
+                } else {
+                    log("Found normal injection exception for domain", injectionExceptionKeys[i]);
+                    output.push({ "x": injectionException });
+                }
+            }
+        }
+
+        if (defaultRules) { output.push({ "s": defaultRules, isDefault: true }) };
+        if (defaultExceptions) { output.push({ "e": defaultExceptions, isDefault: true }) };
+        if (defaultInjections) { output.push({ "i": defaultInjections, isDefault: true }) };
+        if (defaultInjectionExceptions) { output.push({ "x": defaultInjectionExceptions, isDefault: true }) };
 
         return output;
     }
@@ -178,6 +195,11 @@
         .map(r => r["s"]).join(",") + ")" + notSelector + hideRules;
 
     let cssInjections = foundRules.filter(r => r["i"] != null).map(r => r["i"]).join("");
+    let cssInjectionExceptions = foundRules.filter(r => r["x"] != null).map(r => r["x"]).join("|");
+
+    let cssInjectionExceptionsRegex = new RegExp(cssInjectionExceptions, "g");
+
+    cssInjections.replace(cssInjectionExceptionsRegex, "");
 
     // let pageSpecificNotSelector = ":not(" + foundRules.filter(r => r["e"] != null && !r.isDefault)
     //     .map(r => r["e"]).join(",") + ")"
