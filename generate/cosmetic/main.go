@@ -8,6 +8,7 @@ import (
 	"log"
 	"os"
 	"sort"
+	"regexp"
 	"strings"
 	"text/template"
 	"time"
@@ -20,6 +21,17 @@ import (
 func joinSorted(f []string, comma string) string {
 	sort.Strings(f)
 	return strings.Join(f, comma)
+}
+
+func joinSortedMeta(f []string, comma string) string {
+	out := ""
+	tmp := make([]string, len(f))
+	copy(tmp, f)
+	sort.Strings(tmp)
+	for k, v := range tmp {
+		tmp[k] = regexp.QuoteMeta(v)
+	}
+	return strings.Join(tmp, comma)
 }
 
 func toJSObject(x interface{}) string {
@@ -124,6 +136,8 @@ func main() {
 		duplicateCount[joined] = duplicateCount[joined] + 1
 		joined = joinSorted(f.InjectedCSS, "")
 		duplicateCount[joined] = duplicateCount[joined] + 1
+		joined = "(" + joinSortedMeta(f.InjectException, "|") + ")"
+		duplicateCount[joined] = duplicateCount[joined] + 1
 	}
 
 	var deduplicatedStrings []string
@@ -146,6 +160,7 @@ func main() {
 		compiledSelectorRules  = map[string]interface{}{}
 		compiledSelectorExceptions  = map[string]interface{}{}
 		compiledInjectionRules = map[string]interface{}{}
+		compiledInjectionExceptions = map[string]interface{}{}
 	)
 	for domain, filter := range lookupTable {
 		if len(filter.Selectors) > 0 {
@@ -174,6 +189,15 @@ func main() {
 				compiledInjectionRules[domain] = joined
 			}
 		}
+
+		if len(filter.InjectException) > 0 {
+			joined := "(" + joinSortedMeta(filter.InjectException, "|") + ")"
+			if duplicateCount[joined] > 1 {
+				compiledInjectionExceptions[domain] = deduplicatedIndexMapping[joined]
+			} else {
+				compiledInjectionExceptions[domain] = joined
+			}
+		}
 	}
 
 	fmt.Printf("Combined them for %d domains\n", len(compiledSelectorRules))
@@ -194,6 +218,7 @@ func main() {
 		"rules":               toJSObject(compiledSelectorRules),
 		"exceptions":          toJSObject(compiledSelectorExceptions),
 		"injectionRules":      toJSObject(compiledInjectionRules),
+		"injectionExceptions": toJSObject(compiledInjectionExceptions),
 		"deduplicatedStrings": toJSObject(deduplicatedStrings),
 		"statistics":          fmt.Sprintf("blockers for %d domains, exceptions for %d domains, injected CSS rules for %d domains", len(compiledSelectorRules), len(compiledSelectorExceptions), len(compiledInjectionRules)),
 		"isLite":              topDomains != nil,

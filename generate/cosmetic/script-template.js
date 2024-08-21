@@ -26,12 +26,13 @@
 
     let deduplicatedStrings = {{.deduplicatedStrings }};
     let injectionRules = {{.injectionRules }};
+    let injectionExceptions = {{.injectionExceptions }};
     let rules = {{.rules }};
     let exceptions = {{.exceptions }};
     let defaultRules = rules[""];
     let defaultExceptions = exceptions[""];
     let defaultInjections = injectionRules[""];
-
+    let defaultInjectionExceptions = injectionExceptions[""];
 
     function findRules(rules, host) {
         let domainSplit = host.split(".");
