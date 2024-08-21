@@ -270,8 +270,10 @@
     })
 
     elementReady('head').then((_) => {
-        injectStyle(hiddenElementsSelector);
-        log("Injected combined style");
+        if (!hiddenElementsSelector.startsWith(":is()")) {
+            injectStyle(hiddenElementsSelector);
+            log("Injected combined style");
+        }
 
         if (cssInjections.length > 0) {
             injectStyle(cssInjections);
