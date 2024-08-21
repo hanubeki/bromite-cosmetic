@@ -26,3 +26,5 @@ https://filters.adtidy.org/extension/android-content-blocker/filters/7.txt
 # https://raw.githubusercontent.com/Yhonay/antipopads/master/popads.txt
 # https://www.bentasker.co.uk/adblock/adblock_compiled.txt
 https://raw.githubusercontent.com/tofukko/filter/master/antena.txt
+
+https://filters.adtidy.org/extension/android-content-blocker/filters/10.txt
