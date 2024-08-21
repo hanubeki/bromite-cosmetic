@@ -200,7 +200,7 @@
     log("found injection exception rules:", cssInjectionExceptions);
 
     if (cssInjectionExceptions !== "") {
-        let cssInjectionExceptionsRegex = new RegExp(cssInjectionExceptions, "g");
+        let cssInjectionExceptionsRegex = new RegExp("(" + cssInjectionExceptions + ")", "g");
 
         cssInjections.replace(cssInjectionExceptionsRegex, "");
     }
