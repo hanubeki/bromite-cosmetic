@@ -117,6 +117,6 @@ func ParseLine(line string) (f Rule, ok bool) {
 		JoinedDomains: joinedDomains,
 		CSSSelector:   selector,
 		isException:   isCSSException,
-		InjectedCSS:   injectedStyle
+		InjectedCSS:   injectedStyle,
 	}, true
 }
