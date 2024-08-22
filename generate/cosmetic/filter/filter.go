@@ -11,8 +11,6 @@ import (
 type Rule struct {
 	Domains []string
 
-	JoinedDomains string
-
 	CSSSelector string
 
 	isException bool
@@ -107,13 +105,10 @@ func ParseLine(line string) (f Rule, ok bool) {
 		domains = append(domains, "")
 	}
 
-	joinedDomains := strings.Join(domains, ",")
-
 	return Rule{
-		Domains:       domains,
-		JoinedDomains: joinedDomains,
-		CSSSelector:   selector,
-		isException:   isCSSException,
-		InjectedCSS:   injectedStyle,
+		Domains:     domains,
+		CSSSelector: selector,
+		isException: isCSSException,
+		InjectedCSS: injectedStyle,
 	}, true
 }

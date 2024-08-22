@@ -12,37 +12,37 @@ func TestParseLine(t *testing.T) {
 		wantOk bool
 	}{
 		// General rules should have the domain "", as that will be used in the script to inject them in all pages
-		{"###cookie_alert", Rule{Domains: []string{""}, JoinedDomains: "", CSSSelector: "#cookie_alert"}, true},
-		{"##.cookie_alert", Rule{Domains: []string{""}, JoinedDomains: "", CSSSelector: ".cookie_alert"}, true},
+		{"###cookie_alert", Rule{Domains: []string{""}, CSSSelector: "#cookie_alert"}, true},
+		{"##.cookie_alert", Rule{Domains: []string{""}, CSSSelector: ".cookie_alert"}, true},
 		// Wildcard "*" is also supported
-		{"*###cookie_alert", Rule{Domains: []string{"*"}, JoinedDomains: "*", CSSSelector: "#cookie_alert"}, true},
+		{"*###cookie_alert", Rule{Domains: []string{"*"}, CSSSelector: "#cookie_alert"}, true},
 
 		// Normal rules that block certain CSS selectors
-		{"example.com##.ad", Rule{Domains: []string{"example.com"}, JoinedDomains: "example.com", CSSSelector: ".ad"}, true},
-		{"example.com###ad", Rule{Domains: []string{"example.com"}, JoinedDomains: "example.com", CSSSelector: "#ad"}, true},
-		{"a.com, b.com###ad", Rule{Domains: []string{"a.com", "b.com"}, JoinedDomains: "a.com,b.com", CSSSelector: "#ad"}, true},
+		{"example.com##.ad", Rule{Domains: []string{"example.com"}, CSSSelector: ".ad"}, true},
+		{"example.com###ad", Rule{Domains: []string{"example.com"}, CSSSelector: "#ad"}, true},
+		{"a.com, b.com###ad", Rule{Domains: []string{"a.com", "b.com"}, CSSSelector: "#ad"}, true},
 
 		// Rules for injecting CSS styles, usually to fix scrolling issues
-		{"ndtv.com##body:style(overflow: auto !important)", Rule{Domains: []string{"ndtv.com"}, JoinedDomains: "ndtv.com", InjectedCSS: "body{overflow: auto !important}"}, true},
-		{"seb.lt,seb.ee##body,html:style(height: auto !important; overflow: auto !important)", Rule{Domains: []string{"seb.lt", "seb.ee"}, JoinedDomains: "seb.lt,seb.ee", InjectedCSS: "body,html{height: auto !important; overflow: auto !important}"}, true},
-		{"example.com#$#body { background-color: #333!important; }", Rule{Domains: []string{"example.com"}, JoinedDomains: "example.com", InjectedCSS: "body { background-color: #333!important; }"}, true},
+		{"ndtv.com##body:style(overflow: auto !important)", Rule{Domains: []string{"ndtv.com"}, InjectedCSS: "body{overflow: auto !important}"}, true},
+		{"seb.lt,seb.ee##body,html:style(height: auto !important; overflow: auto !important)", Rule{Domains: []string{"seb.lt", "seb.ee"}, InjectedCSS: "body,html{height: auto !important; overflow: auto !important}"}, true},
+		{"example.com#$#body { background-color: #333!important; }", Rule{Domains: []string{"example.com"}, InjectedCSS: "body { background-color: #333!important; }"}, true},
 
 		// Some rules I found in real files
-		{`yandex.ru#$#div[class*="_with-url-actualizer_yes"] > div.adv_type_top { display: none !important; }`, Rule{Domains: []string{"yandex.ru"}, JoinedDomains: "yandex.ru", InjectedCSS: `div[class*="_with-url-actualizer_yes"] > div.adv_type_top { display: none !important; }`}, true},
-		{"##.gdpr-box:not(body):not(html)", Rule{Domains: []string{""}, JoinedDomains: "", CSSSelector: ".gdpr-box:not(body):not(html)"}, true},
-		{"arm.com##.c-policies", Rule{Domains: []string{"arm.com"}, JoinedDomains: "arm.com", CSSSelector: ".c-policies"}, true},
+		{`yandex.ru#$#div[class*="_with-url-actualizer_yes"] > div.adv_type_top { display: none !important; }`, Rule{Domains: []string{"yandex.ru"}, InjectedCSS: `div[class*="_with-url-actualizer_yes"] > div.adv_type_top { display: none !important; }`}, true},
+		{"##.gdpr-box:not(body):not(html)", Rule{Domains: []string{""}, CSSSelector: ".gdpr-box:not(body):not(html)"}, true},
+		{"arm.com##.c-policies", Rule{Domains: []string{"arm.com"}, CSSSelector: ".c-policies"}, true},
 
 		// Invalid rules that should be rejected
 
 		// has() is not supported by chromium, but I go through
-		{"example.com##.ad:has(.child)", Rule{Domains: []string{"example.com"}, JoinedDomains: "example.com", CSSSelector: ".ad:has(.child)"}, true},
+		{"example.com##.ad:has(.child)", Rule{Domains: []string{"example.com"}, CSSSelector: ".ad:has(.child)"}, true},
 
 		// exception rules
-		{"example.com#@#.non-ad", Rule{Domains: []string{"example.com"}, JoinedDomains: "example.com", CSSSelector: ".non-ad", isException: true}, true},
-		{"example.com#@$#body { background-color: red!important; }", Rule{Domains: []string{"example.com"}, JoinedDomains: "example.com", InjectedCSS: "body { background-color: red!important; }", isException: true}, true},
+		{"example.com#@#.non-ad", Rule{Domains: []string{"example.com"}, CSSSelector: ".non-ad", isException: true}, true},
+		{"example.com#@$#body { background-color: red!important; }", Rule{Domains: []string{"example.com"}, InjectedCSS: "body { background-color: red!important; }", isException: true}, true},
 
 		// tilded domains
-		{"example.com,~subdomain.example.com##.ad", Rule{Domains: []string{"example.com", "~subdomain.example.com"}, JoinedDomains: "example.com,~subdomain.example.com", CSSSelector: ".ad"}, true},
+		{"example.com,~subdomain.example.com##.ad", Rule{Domains: []string{"example.com", "~subdomain.example.com"}, CSSSelector: ".ad"}, true},
 
 		// Other rules are either already taken care of by the built-in adblocker or are just not supported
 		{"http://example.org/", Rule{}, false},
