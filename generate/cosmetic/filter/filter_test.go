@@ -15,7 +15,7 @@ func TestParseLine(t *testing.T) {
 		{"###cookie_alert", Rule{Domains: []string{""}, JoinedDomains: "", CSSSelector: "#cookie_alert"}, true},
 		{"##.cookie_alert", Rule{Domains: []string{""}, JoinedDomains: "", CSSSelector: ".cookie_alert"}, true},
 		// Wildcard "*" is also supported
-		{"*###cookie_alert", Rule{Domains: []string{""}, JoinedDomains: "", CSSSelector: "#cookie_alert"}, true},
+		{"*###cookie_alert", Rule{Domains: []string{"*"}, JoinedDomains: "*", CSSSelector: "#cookie_alert"}, true},
 
 		// Normal rules that block certain CSS selectors
 		{"example.com##.ad", Rule{Domains: []string{"example.com"}, JoinedDomains: "example.com", CSSSelector: ".ad"}, true},

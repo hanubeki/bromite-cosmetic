@@ -106,9 +106,6 @@ func ParseLine(line string) (f Rule, ok bool) {
 		// General rules for all domains need the empty domain to work with the script
 		domains = append(domains, "")
 	}
-	if split[0] == "*" {
-		domains = []string{""}
-	}
 
 	joinedDomains := strings.Join(domains, ",")
 

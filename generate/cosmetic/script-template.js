@@ -40,6 +40,11 @@
         let output = [];
 
         for (i in rules) {
+            if (i === "*") {
+                output.push(i);
+                continue;
+            }
+
             let ruleSplit = i.split(",");
 
             let allTilded = true;
