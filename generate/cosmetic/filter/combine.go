@@ -5,11 +5,11 @@ import (
 )
 
 type CombineResult struct {
-	Domains         []string
-	Selectors       []string
-	Exceptions      []string
-	InjectedCSS     []string
-	InjectException []string
+	Domains            []string
+	Selectors          []string
+	Exceptions         []string
+	InjectedCSS        []string
+	InjectionException []string
 }
 
 func Combine(filters []Rule) (m map[string]CombineResult) {
@@ -21,17 +21,17 @@ func Combine(filters []Rule) (m map[string]CombineResult) {
 
 		out.Domains = f.Domains
 
-		if f.CSSSelector != "" && !contains(out.Selectors, f.CSSSelector) {
-			if f.isException {
+		if f.CSSSelector != "" {
+			if f.isException && !contains(out.Exceptions, f.CSSSelector) {
 				out.Exceptions = append(out.Exceptions, f.CSSSelector)
-			} else {
+			} else if !contains(out.Selectors, f.CSSSelector) {
 				out.Selectors = append(out.Selectors, f.CSSSelector)
 			}
 		}
-		if f.InjectedCSS != "" && !contains(out.InjectedCSS, f.InjectedCSS) {
-			if f.isException {
-				out.InjectException = append(out.InjectException, f.InjectedCSS)
-			} else {
+		if f.InjectedCSS != "" {
+			if f.isException && !contains(out.InjectionException, f.InjectedCSS) {
+				out.InjectionException = append(out.InjectionException, f.InjectedCSS)
+			} else if !contains(out.InjectedCSS, f.InjectedCSS) {
 				out.InjectedCSS = append(out.InjectedCSS, f.InjectedCSS)
 			}
 		}

@@ -135,7 +135,7 @@ func main() {
 		duplicateCount[joined] = duplicateCount[joined] + 1
 		joined = joinSorted(f.InjectedCSS, "")
 		duplicateCount[joined] = duplicateCount[joined] + 1
-		joined = joinSortedMeta(f.InjectException, "|")
+		joined = joinSortedMeta(f.InjectionException, "|")
 		duplicateCount[joined] = duplicateCount[joined] + 1
 	}
 
@@ -189,8 +189,8 @@ func main() {
 			}
 		}
 
-		if len(filter.InjectException) > 0 {
-			joined := joinSortedMeta(filter.InjectException, "|")
+		if len(filter.InjectionException) > 0 {
+			joined := joinSortedMeta(filter.InjectionException, "|")
 			if duplicateCount[joined] > 1 {
 				compiledInjectionExceptions[domain] = deduplicatedIndexMapping[joined]
 			} else {
