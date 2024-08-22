@@ -1,19 +1,19 @@
 // ==UserScript==
-// @name         Cosmetic Ad Block for Bromite{{if .isLite}} (Lite){{end}}
+// @name         Cosmetic Ad Block for Bromite/Hermit{{if .isLite}} (Lite){{end}}
 // @namespace    xarantolus
 // @version      {{.version}}
 // @description  Blocks annoying elements in {{if .isLite}}top {{.topDomainCount}} domains{{else}}pages{{end}}, sourced from many different filter lists
-// @author       xarantolus
+// @author       xarantolus, hanubeki
 // @match        *://*/*
 // @grant        none
 // @run-at       document-start
-// @homepage     https://userscripts.010.one
-// @url_source   https://github.com/xarantolus/bromite-userscripts/releases/latest/download/cosmetic{{if .isLite}}-lite{{end}}.user.js
+// @homepage     https://www.geocities.jp/cbrk803832/
+// @url_source   https://github.com/hanubeki/bromite-cosmetic/releases/latest/download/cosmetic{{if .isLite}}-lite{{end}}.user.js
 // ==/UserScript==
 /// @stats {{.statistics}}
 {
     let log = function (...data) {
-        console.log("[Cosmetic filters by xarantolus (v{{.version}} {{if .isLite}}lite{{else}}full{{end}})]:", ...data);
+        console.log("[hanubeki's fork of Cosmetic filters by xarantolus (v{{.version}} {{if .isLite}}lite{{else}}full{{end}})]:", ...data);
     }
 
 
