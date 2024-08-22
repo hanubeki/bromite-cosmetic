@@ -16,7 +16,7 @@ func Combine(filters []Rule) (m map[string]CombineResult) {
 	m = make(map[string]CombineResult)
 
 	for _, f := range filters {
-		d := strings.join(f.Domains, ",")
+		d := strings.Join(f.Domains, ",")
 		out := m[d]
 
 		out.Domains = f.Domains
