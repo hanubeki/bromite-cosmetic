@@ -1,5 +1,9 @@
 package filter
 
+import (
+	"strings"
+)
+
 type CombineResult struct {
 	Domains         []string
 	Selectors       []string
