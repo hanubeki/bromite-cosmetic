@@ -5,7 +5,7 @@ https://filters.adtidy.org/extension/android-content-blocker/filters/2.txt
 https://filters.adtidy.org/extension/android-content-blocker/filters/14.txt
 
 # social
-https://filters.adtidy.org/extension/android-content-blocker/filters/4.txt
+# https://filters.adtidy.org/extension/android-content-blocker/filters/4.txt
 
 # mobile
 https://filters.adtidy.org/extension/android-content-blocker/filters/11.txt
